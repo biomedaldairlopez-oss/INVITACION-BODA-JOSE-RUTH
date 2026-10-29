@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestra Boda - Jose Antonio & Ruth Silvia</title>
+  <link rel="stylesheet" href="style.css">
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ============ FONDO AMBIENTAL: esferas difusas + lavanda (decorativo, detrás del vidrio) ============ -->
+  <div class="fondo-ambiental" aria-hidden="true">
+    <span class="esfera esfera--1"></span><span class="esfera esfera--2"></span>
+    <span class="esfera esfera--3"></span><span class="esfera esfera--4"></span>
+    <svg class="flor-fondo flor-fondo--1" viewBox="0 0 60 60"><use href="#flor-lavanda"/></svg>
+    <svg class="flor-fondo flor-fondo--2" viewBox="0 0 60 60"><use href="#flor-lavanda"/></svg>
+    <svg class="flor-fondo flor-fondo--3" viewBox="0 0 60 60"><use href="#flor-lavanda"/></svg>
+    <svg class="flor-fondo flor-fondo--4" viewBox="0 0 60 60"><use href="#flor-lavanda"/></svg>
+  </div>
+
+  <!-- ============ SOBRE DE APERTURA ============ -->
+  <noscript><style>#sobre-intro{display:none!important;}</style></noscript>
+  <div id="sobre-intro" class="sobre-intro">
+    <div class="sobre-intro__rosas" aria-hidden="true">
+      <svg class="rosa rosa--animada rosa--tl" style="--d:.15s" viewBox="0 0 100 100"><use href="#rosa-lavanda"/></svg>
+      <svg class="rosa rosa--animada rosa--tr" style="--d:.35s" viewBox="0 0 100 100"><use href="#rosa-lavanda"/></svg>
+      <svg class="rosa rosa--animada rosa--bl" style="--d:.5s" viewBox="0 0 100 100"><use href="#rosa-lavanda"/></svg>
+      <svg class="rosa rosa--animada rosa--br" style="--d:.25s" viewBox="0 0 100 100"><use href="#rosa-lavanda"/></svg>
+    </div>
+
+    <button type="button" id="btn-abrir-sobre" class="sobre" aria-label="Toca para abrir la invitación de José y Ruth">
+      <span class="sobre__solapa"></span>
+      <span class="sobre__sello">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M20 9 C15 9 11.5 12.5 11.5 17 C11.5 22 15 25 20 29 C25 25 28.5 22 28.5 17 C28.5 12.5 25 9 20 9 Z" fill="#fff" fill-opacity=".92"/>
+        </svg>
+      </span>
+      <span class="sobre__cuerpo">
+        <span class="sobre__nombres">Jose &amp; Ruth</span>
+        <span class="sobre__cta">Toca para abrir</span>
+      </span>
+    </button>
+  </div>
+
+  <!-- Música de fondo -->
+  <audio id="musica" loop>
+    <source src="nuestracancion.mpeg" type="audio/mpeg">
+  </audio>
+  <button id="btn-musica" class="btn-float">🎵 Reproducir Música</button>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="overlay">
+      <h1 class="nombres">Jose Antonio &amp; Ruth Silvia</h1>
+      <p class="nombrespre">¡Nos casamos!</p>
+      <p class="nombrespre">¡Queremos compartir este día tan especial contigo!</p>
+      <div id="cuenta-regresiva" class="timer"></div>
+    </div>
+  </header>
+
+  <main class="container bento">
+
+    <!-- ============ PADRES Y PADRINOS ============ -->
+    <section class="card padres bento-4 reveal">
+      <svg class="flor-accent" viewBox="0 0 60 60" aria-hidden="true"><use href="#flor-lavanda"/></svg>
+      <h2>Con la bendición de Dios y nuestros queridos padres</h2>
+
+      <div class="padres__grid">
+        <div class="padres__col">
+          <h3>Padres de la novia</h3>
+          <p>Ponciano Sanchez Quispe</p>
+          <p>Teodocia Basilia Mayta Kantuta</p>
+        </div>
+        <div class="padres__col">
+          <h3>Padres del novio</h3>
+          <p>Teresa Limachi Mancilla</p>
+          <p>Clemente Limachi Averanga <span class="parentesco">(Abuelo)</span></p>
+          <p>Hilaria Mancilla Ibañez de Limachi <span class="parentesco">(Abuela)</span></p>
+        </div>
+      </div>
+
+      <p class="padrinos-anillo">Y en compañía de nuestros padrinos de anillo y consejeros<br>
+        Pastor Edson Vargas &amp; Pastora Pialy Torrico</p>
+    </section>
+    <!-- ============ CEREMONIA ============ -->
+    <!-- EDITAR: cambia el lugar, la dirección y la búsqueda del mapa -->
+    <section class="card recepcion bento-2 tinte-rosa reveal" id="ceremonia">
+      <img src="images1.jpg" class="icono-seccion" alt="Ceremonia Religiosa">
+      <h2>Ceremonia Religiosa</h2>
+      <p><strong>Hora:</strong> 11:00 a.m.</p>
+      <p class="recepcion__lugar">LUGAR DE LA CEREMONIA</p>
+      <p>Dirección de la ceremonia</p>
+      <a class="btn-mapa"
+         href="https://www.google.com/maps/search/?api=1&query=Centro+de+Eventos+JIWASA+Achocalla+Bolivia"
+         target="_blank" rel="noopener">📍 Ver mapa</a>
+    </section>
+
+    <!-- ============ RECEPCIÓN ============ -->
+    <section class="card recepcion bento-2 tinte-lila reveal">
+      <img src="images4.jpg" class="icono-seccion" alt="Recepción">
+      <h2>Recepción</h2>
+      <p><strong>Hora:</strong> 14:00 p.m.</p>
+      <p class="recepcion__lugar">Centro de Eventos JIWASA</p>
+      <p>Carretera El Alto - Mallasa, Achocalla</p>
+      <a class="btn-mapa"
+         href="https://www.google.com/maps/search/?api=1&query=Centro+de+Eventos+JIWASA+Achocalla+Bolivia"
+         target="_blank" rel="noopener">📍 Ver mapa</a>
+    </section>
+
+    <!-- ============ ITINERARIO ============ -->
+    <section class="card itinerario-section bento-4 reveal">
+      <h2 class="titulo-script">Itinerario</h2>
+    
+      <div class="itinerario-grid">
+        <!-- Item 1 -->
+        <div class="itinerario-item">
+          <img src="images1.jpg" class="itinerario-icono" alt="Ceremonia" />
+          <div class="itinerario-info">
+            <h3>Ceremonia Religiosa</h3>
+            <span class="hora">11:00 A. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 2 -->
+        <div class="itinerario-item">
+          <img src="images2.jpg" class="itinerario-icono" alt="Sí acepto" />
+          <div class="itinerario-info">
+            <h3>Sí, acepto</h3>
+            <span class="hora">11:45 A. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 3 -->
+        <div class="itinerario-item">
+          <img src="images3.jpg" class="itinerario-icono" alt="Fotos" />
+          <div class="itinerario-info">
+            <h3>Sesión de Fotos</h3>
+            <span class="hora">12:00 P. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 4 -->
+        <div class="itinerario-item">
+          <img src="images4.jpg" class="itinerario-icono" alt="Recepción" />
+          <div class="itinerario-info">
+            <h3>Bienvenidos a la Recepción</h3>
+            <span class="hora">14:00 P. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 5 -->
+        <div class="itinerario-item">
+          <img src="images5.jpg" class="itinerario-icono" alt="Vals" />
+          <div class="itinerario-info">
+            <h3>Vals</h3>
+            <span class="hora">14:30 P. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 6 -->
+        <div class="itinerario-item">
+          <img src="images6.jpg" class="itinerario-icono" alt="Brindis" />
+          <div class="itinerario-info">
+            <h3>Brindemos por el amor</h3>
+            <span class="hora">15:00 P. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 7 -->
+        <div class="itinerario-item">
+          <img src="images7.jpg" class="itinerario-icono" alt="Buen provecho" />
+          <div class="itinerario-info">
+            <h3>¡Buen provecho!</h3>
+            <span class="hora">16:00 P. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 8 -->
+        <div class="itinerario-item">
+          <img src="images8.jpg" class="itinerario-icono" alt="Primer baile" />
+          <div class="itinerario-info">
+            <h3>Nuestro primer baile</h3>
+            <span class="hora">17:30 P. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 9 -->
+        <div class="itinerario-item">
+          <img src="images9.jpg" class="itinerario-icono" alt="Torta" />
+          <div class="itinerario-info">
+            <h3>¡Queremos torta!</h3>
+            <span class="hora">18:30 P. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 10 -->
+        <div class="itinerario-item">
+          <img src="images10.jpg" class="itinerario-icono" alt="Ramo y Balón" />
+          <div class="itinerario-info">
+            <h3>Ramo y Balón</h3>
+            <span class="hora">19:15 P. M.</span>
+          </div>
+        </div>
+    
+        <!-- Item 11 -->
+        <div class="itinerario-item">
+          <img src="images11.jpg" class="itinerario-icono" alt="Fiesta" />
+          <div class="itinerario-info">
+            <h3>Disfrutemos de lo que queda</h3>
+            <span class="hora">19:46 P. M.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CÓDIGO DE VESTIMENTA ============ -->
+    <section class="card vestimenta bento-4 tinte-lavanda reveal">
+      <img src="codigovestienta.jpg" class="icono-seccion" alt="codigo de vestimenta">
+      <h2>Código de vestimenta</h2>
+      <p class="vestimenta__tipo">Elegante</p>
+      <p>Prepárense para una boda llena de colores, dejen el blanco para la novia.</p>
+    </section>
+
+    <!-- ============ GALERÍA ============ -->
+    <section class="card galeria bento-4 reveal">
+      <h2>Nuestros Momentos</h2>
+      <div class="mosaico mosaico--a">
+        <img class="m-alto" src="IMG-20261019-WA0012.jpg" alt="José y Ruth" loading="lazy" decoding="async">
+        <img class="m-grande" src="IMG-20261019-WA0011.jpg" alt="José y Ruth" alt="José y Ruth" loading="lazy" decoding="async">
+        <img class="m-ancho" src="IMG-20261019-WA0015.jpg" alt="José y Ruth" alt="José y Ruth" loading="lazy" decoding="async">
+    </section>
+
+    <!-- ============ COMPARTIR FOTOS ============ -->
+    <section class="card compartir bento-4 tinte-rosa reveal" id="compartir-fotos">
+      <img src="camara.png" class="icono-seccion" alt="fotos">
+      <h2>Compartir Fotos</h2>
+      <p>Te invitamos a compartir los momentos más especiales de nuestra boda a través de tus fotografías.</p>
+      <a class="btn-confirmar" id="link-fotos" href="TU_LINK_DE_GOOGLE_DRIVE_O_FOTOS" target="_blank" rel="noopener">Compartir fotos</a>
+    </section>
+
+    <!-- ============ CONFIRMAR ASISTENCIA ============ -->
+    <section class="card confirmar bento-4 tinte-lila reveal">
+      <svg class="flor-accent" viewBox="0 0 60 60" aria-hidden="true"><use href="#flor-lavanda"/></svg>
+      <h2>Confirma tu Asistencia</h2>
+      <p class="mensaje"></p>Celebrar nuestro amor es un sueño hecho realidad, y para que sea perfecto nos encantaria contar contigo en nuestra lista de invitados.</h2>
+      <p class="nota-confirmacion">Por favor confirma hasta el <strong>20 de noviembre de 2026</strong>.</p>
+
+      <form id="form-rsvp" class="form-rsvp" novalidate>
+        <div class="form-rsvp__campo">
+          <label for="rsvp-personas">Número de personas</label>
+          <select id="rsvp-personas" name="personas" required>
+            <option value="" disabled selected>Selecciona</option>
+            <option value="1">1 persona</option>
+            <option value="2">2 personas</option>
+          </select>
+        </div>
+        <div class="form-rsvp__campo">
+          <label for="rsvp-nombres">Nombre de los asistentes</label>
+          <input type="text" id="rsvp-nombres" name="nombres" placeholder="Ej: Juan Pérez, María Pérez" required>
+        </div>
+        <div class="form-rsvp__campo">
+          <label for="rsvp-telefono">Teléfono</label>
+          <input type="tel" id="rsvp-telefono" name="telefono" placeholder="+591..." required>
+        </div>
+        <div class="form-rsvp__campo">
+          <label for="rsvp-mensaje">Mensaje para los novios</label>
+          <textarea id="rsvp-mensaje" name="mensaje" rows="3" placeholder="(Opcional)"></textarea>
+        </div>
+        <button type="submit" class="btn-confirmar form-rsvp__enviar">Confirmar asistencia</button>
+        <p class="form-rsvp__estado" id="rsvp-estado" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- ============ MÁS FOTOS ============ -->
+    <section class="card mas-fotos bento-4 tinte-lavanda reveal">
+      <h2>Más Momentos</h2>
+      <div class="mosaico mosaico--b">
+        <img class="m-alto" src="IMG-20261019-WA0013.jpg" alt="José y Ruth" loading="lazy" decoding="async">
+        <img class="m-grande" src="IMG-20261019-WA0014.jpg" alt="José y Ruth" loading="lazy" decoding="async">
+        <img class="m-alto" src="IMG-20261019-WA0016.jpg" alt="José y Ruth" loading="lazy" decoding="async">
+      </div>
+    </section>
+
+    <!-- ============ REGALOS ============ -->
+    <section class="card regalos bento-4 tinte-rosa reveal">
+      <h2>Mesa de Regalos</h2>
+      <p>¿Quieres ser parte de nuestra historia de amor?</p>
+      <p>Ayudanos a escribir el proximo capítulo de nuestra historia. Si deseas hacernos un presente, puedes realizarlo escaneando el codigo QR o por transferencia.</p>
+      <div class="qr-container">
+        <img src="qr-pago.png" alt="Código QR para transferencia" class="qr-code">
+        <p class="qr-texto">Banco: Banco Sol</p>
+        <p> Nº Cuenta: 2188730-000-001</p>
+      </div>
+    </section>
+
+    <!-- ============ AVISO NIÑOS ============ -->
+    <section class="card aviso-ninos bento-4 tinte-lavanda reveal">
+      <h2>Nota Especial</h2>
+      <p>Amamos a sus pequeños, pero para que todos podamos disfrutar, relajarnos y celebrar al máximo, hemos decidido que nuestra boda sea un</p>
+      <p>Evento exclusivo para adultos</p>
+      <p>¡Agradecemos mucho su comprensión!</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Con mucho amor, Jose Antonio Limachi &amp; Ruth Silvia Sanchez Mayta ❤️</p>
+  </footer>
+
+  <!-- ============ ICONOS Y FLOR (sprite SVG, reutilizados con <use>) ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="icono-iglesia" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 8 L32 18" /><path d="M27 12 L37 12" />
+        <path d="M20 58 L20 34 L32 22 L44 34 L44 58 Z" />
+        <path d="M32 58 V44 M26 58 V48 H38 V58" />
+        <path d="M14 58 H50" />
+      </g>
+      <g id="icono-casa" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 56 V28 L32 14 L50 28 V56 Z" />
+        <path d="M26 56 V40 H38 V56" />
+        <path d="M20 56 H44" />
+      </g>
+      <g id="icono-vestimenta" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 14 L32 22 L42 14 L48 22 L42 28 V54 H22 V28 L16 22 Z" />
+        <path d="M46 16 L54 20 L50 30 L46 28" />
+      </g>
+      <g id="icono-camara" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="10" y="20" width="44" height="32" rx="4" />
+        <path d="M24 20 L28 13 H36 L40 20" />
+        <circle cx="32" cy="36" r="9" />
+      </g>
+      <g id="flor-lavanda" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M30 50 C 28 38, 26 30, 30 18" />
+        <ellipse cx="22" cy="20" rx="7" ry="4" transform="rotate(-30 22 20)" fill="currentColor" fill-opacity=".35" stroke="none" />
+        <ellipse cx="34" cy="16" rx="7" ry="4" transform="rotate(15 34 16)" fill="currentColor" fill-opacity=".35" stroke="none" />
+        <ellipse cx="16" cy="30" rx="6" ry="3.5" transform="rotate(-10 16 30)" fill="currentColor" fill-opacity=".25" stroke="none" />
+        <path d="M30 34 C 24 32, 20 34, 16 40" />
+        <ellipse cx="14" cy="42" rx="5" ry="3" transform="rotate(-20 14 42)" fill="currentColor" fill-opacity=".3" stroke="none" />
+      </g>
+
+      <!-- Rosa de 6 pétalos en tonos lavanda con centro dorado -->
+      <g id="rosa-lavanda">
+        <g transform="rotate(0 50 50)"><path d="M50,50 C38,34 40,10 50,2 C60,10 62,34 50,50 Z" fill="#a98fc4"/></g>
+        <g transform="rotate(60 50 50)"><path d="M50,50 C38,34 40,10 50,2 C60,10 62,34 50,50 Z" fill="#8f74ad"/></g>
+        <g transform="rotate(120 50 50)"><path d="M50,50 C38,34 40,10 50,2 C60,10 62,34 50,50 Z" fill="#a98fc4"/></g>
+        <g transform="rotate(180 50 50)"><path d="M50,50 C38,34 40,10 50,2 C60,10 62,34 50,50 Z" fill="#8f74ad"/></g>
+        <g transform="rotate(240 50 50)"><path d="M50,50 C38,34 40,10 50,2 C60,10 62,34 50,50 Z" fill="#a98fc4"/></g>
+        <g transform="rotate(300 50 50)"><path d="M50,50 C38,34 40,10 50,2 C60,10 62,34 50,50 Z" fill="#8f74ad"/></g>
+        <circle cx="50" cy="50" r="7" fill="#c6a15b" />
+        <circle cx="50" cy="50" r="7" fill="none" stroke="#e7cf9a" stroke-width="1" />
+      </g>
+    </defs>
+  </svg>
+
+  <script src="script.js"></script>
+</body>
+</html>

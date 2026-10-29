@@ -1,0 +1,757 @@
+:root {
+  /* Paleta pastel */
+  --rosa: #F8D7E5; --rosa-medio: #EBC1D4; --rosa-palo: #D8A0B5;
+  --lila: #C9B5E8; --lila-medio: #D7C6EE; --lavanda: #E6DDF7;
+  --ciruela: #6b4e8a; --rosa-oscuro: #8a4a65;
+  /* Variables existentes, remapeadas a la nueva paleta */
+  --lavanda-principal: #9a7fc0;
+  --lavanda-oscuro: #6b4e8a;
+  --lavanda-suave: #f6f0fa;
+  --lavanda-linea: #d7c6ee;
+  --dorado: #D8A0B5;
+  --dorado-claro: #F8D7E5;
+  --dorado-suave: #EBC1D4;
+  --dorado-oscuro: #9c5873;
+  --blanco: #ffffff;
+  --texto: #4a4a4a;
+  --sombra: rgba(140, 100, 170, 0.18);
+  /* Tipografías */
+  --f-script: 'Great Vibes', cursive;
+  --f-serif: 'Cormorant Garamond', Georgia, serif;
+  --f-sans: 'Montserrat', sans-serif;
+  --f-comic: 'Comic', 'sans-MS';
+}
+
+* { box-sizing: border-box; }
+
+html.no-scroll, body.no-scroll { overflow: hidden; height: 100%; }
+
+/* ============ SOBRE DE APERTURA ============ */
+.sobre-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #F8D7E5 0%, #D7C6EE 48%, #C9B5E8 100%);
+  transition: opacity .7s ease, visibility .7s ease;
+}
+.sobre-intro.oculto { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.sobre-intro__rosas { position: absolute; inset: 0; pointer-events: none; }
+.rosa { position: absolute; width: 90px; opacity: 0; }
+.rosa--tl { top: 6%; left: 6%; }
+.rosa--tr { top: 6%; right: 6%; width: 70px; }
+.rosa--bl { bottom: 6%; left: 7%; width: 65px; }
+.rosa--br { bottom: 8%; right: 8%; }
+
+.rosa--animada {
+  animation: rosa-bloom .9s cubic-bezier(.34, 1.56, .64, 1) both;
+  animation-delay: var(--d, 0s);
+  transform-origin: center;
+}
+@keyframes rosa-bloom {
+  from { transform: scale(0) rotate(-25deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: .9; }
+}
+
+.sobre {
+  position: relative;
+  width: 260px;
+  height: 190px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  perspective: 800px;
+}
+.sobre:focus-visible { outline: 2px solid var(--dorado-claro); outline-offset: 6px; border-radius: 10px; }
+
+.sobre__cuerpo {
+  position: absolute;
+  inset: 0;
+  top: 32%;
+  background: linear-gradient(160deg, #fbf8fd, #f1e9f7);
+  border: 1px solid var(--lavanda-linea);
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 14px 34px rgba(60, 40, 80, .4);
+}
+.sobre__nombres {
+  font-family: var(--f-script);
+  font-size: 1.7rem;
+  color: var(--lavanda-oscuro);
+}
+.sobre__cta {
+  font-size: .72rem;
+  letter-spacing: .6px;
+  color: var(--lavanda-principal);
+  text-transform: uppercase;
+  animation: pulso-sutil 1.8s ease-in-out infinite;
+}
+@keyframes pulso-sutil {
+  0%, 100% { opacity: .6; }
+  50% { opacity: 1; }
+}
+
+.sobre__solapa {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 68%;
+  background: linear-gradient(135deg, var(--lavanda-principal), var(--lavanda-oscuro));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transform-style: preserve-3d;
+  transition: transform .85s cubic-bezier(.6, -0.28, .74, .3);
+  box-shadow: 0 8px 18px rgba(60, 40, 80, .3);
+  z-index: 2;
+}
+
+.sobre__sello {
+  position: absolute;
+  top: 40%; left: 50%;
+  width: 48px; height: 48px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 35% 30%, var(--dorado-claro), var(--dorado) 60%, #9c7a3c 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,.35), inset 0 1px 2px rgba(255,255,255,.4);
+  transition: transform .5s ease .15s, opacity .5s ease .15s;
+  z-index: 3;
+}
+.sobre__sello svg { width: 20px; height: 20px; }
+
+/* Estado "abriendo": la solapa gira hacia atrás y el sello se rompe */
+.sobre-intro.abriendo .sobre__solapa { transform: rotateX(-170deg); }
+.sobre-intro.abriendo .sobre__sello { transform: translate(-50%, -50%) scale(0) rotate(35deg); opacity: 0; }
+.sobre-intro.abriendo .sobre__cta { animation: none; opacity: 0; transition: opacity .3s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rosa--animada { animation: none; opacity: .9; }
+  .sobre__solapa, .sobre__sello { transition: opacity .3s ease; }
+  .sobre-intro.abriendo .sobre__solapa,
+  .sobre-intro.abriendo .sobre__sello { transform: none; opacity: 0; }
+}
+
+@media (max-width: 420px) {
+  .sobre { width: 220px; height: 170px; }
+  .rosa { width: 60px; }
+}
+
+body {
+  font-family: var(--f-sans);
+  margin: 0;
+  background-color: #fbf3f8;
+  color: var(--texto);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+h2 {
+  font-family: var(--f-script);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem); /* Un tamaño generoso para que luzca la caligrafía */
+  text-transform: none; /* ¡Clave! Elimina el texto en mayúsculas para que sea cursiva elegante */
+  letter-spacing: normal;
+  color: var(--ciruela); /* O el color morado/lavanda que estés usando */
+  margin: 0 0 10px;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 2px;
+  margin: 10px auto 20px;
+  background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+}
+
+h3 {
+  font-family: var(--f-serif);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--lavanda-oscuro);
+  margin-bottom: 8px;
+}
+p{
+  font-family: var(--f-comic);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color:rgba(41, 21, 63, 0.7)
+}
+/* ============ HERO ============ */
+.hero {
+  background: linear-gradient(rgba(216, 160, 181, 0.30), rgba(107, 78, 138, 0.70)), url('IMG-20261019-WA0010.jpg') center/cover;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.nombres {
+  font-family: var(--f-script);
+  font-size: 6.4rem;
+  line-height: 1.1;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.nombrespre{
+  font-family: var(--f-script);
+  font-size: 36px;
+  line-height: 1.1;
+  font-weight: 100;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.subtitulo p{
+  font-family: var(--f-script);
+  font-size: 2.1rem;
+  letter-spacing: 1px;
+  color:white;
+}
+
+.timer {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 10px 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* ============ LAYOUT ============ */
+.container {
+  max-width: 860px;
+  margin: -50px auto 40px auto;
+  padding: 0 20px;
+}
+
+.card {
+  position: relative;
+  background: white;
+  padding: 36px 30px;
+  margin-bottom: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px var(--sombra);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,255,255,.42));
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow: 0 10px 32px rgba(140, 100, 170, .16), inset 0 1px 0 rgba(255,255,255,.95);
+  overflow: hidden;
+}
+
+.icono-seccion {
+  width: 46px; height: 46px;
+  color: var(--lavanda-principal);
+  margin-bottom: 6px;
+}
+
+.flor-accent {
+  position: absolute;
+  top: -6px; right: -6px;
+  width: 70px; height: 70px;
+  color: var(--lavanda-principal);
+  opacity: .55;
+  transform: rotate(20deg);
+  pointer-events: none;
+}
+
+.nota-editar {
+  font-size: .78rem;
+  color: #b2a4c4;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+/* ============ PADRES Y PADRINOS ============ */
+.padres__grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.padres__col p { margin: 2px 0; }
+.parentesco { font-size: .85em; color: #5f5f5f; }
+
+.padrinos-anillo {
+  font-size: .95rem;
+  color: var(--lavanda-oscuro);
+  border-top: 1px dashed var(--lavanda-linea);
+  padding-top: 14px;
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+/* ============ RECEPCIÓN ============ */
+.recepcion__lugar {
+  font-weight: 600;
+  color: var(--lavanda-oscuro);
+}
+
+.btn-mapa {
+  display: inline-block;
+  margin-top: 14px;
+  background-image: linear-gradient(135deg, var(--rosa-palo), var(--lila));
+  color: #3f2d57;
+  padding: 10px 22px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: .9rem;
+  border: 1px solid var(--dorado-suave);
+  transition: background .3s ease, transform .25s ease, border-color .3s ease;
+}
+.btn-mapa:hover { filter: brightness(.96); border-color: #fff; transform: translateY(-2px); }
+
+.icono-seccion {
+  width: 95px;
+  height: auto;
+} 
+
+/* ============ ITINERARIO (timeline) ============ */
+/* Contenedor del itinerario dentro de la tarjeta */
+.bento-itinerario {
+  padding: 1.5rem 1rem;
+  overflow: hidden; /* Evita que los textos largos sobresalgan de la tarjeta */
+}
+
+/* Título del itinerario */
+.bento-itinerario .titulo-script {
+  font-family: var(--f-script);
+  font-size: 2.8rem;
+  color: var(--ciruela);
+  text-align: center;
+  margin-bottom: 1rem;
+  text-transform: none;
+}
+
+/* Rejilla vertical */
+.itinerario-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem; /* Espacio más compacto entre elementos */
+  width: 100%;
+}
+
+/* Cada fila del itinerario */
+.itinerario-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.4rem 0.5rem;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+}
+
+/* Forzar tamaño pequeño y fijo al icono para que no escale mal */
+.itinerario-icono {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  object-fit: contain;
+}
+
+/* Contenedor de texto */
+.itinerario-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* Alineado a la izquierda para que sea legible */
+  width: 100%;
+}
+
+/* Título del evento */
+.itinerario-info h3 {
+  font-family: var(--f-serif);
+  font-size: 0.95rem; /* Tamaño de letra adecuado para la tarjeta */
+  margin: 0;
+  color: var(--texto);
+  font-weight: 500;
+  text-transform: none;
+  line-height: 1.2;
+}
+
+/* Hora del evento */
+.itinerario-info .hora {
+  font-family: var(--f-sans);
+  font-size: 0.8rem;
+  color: var(--ciruela);
+  font-weight: 600;
+  margin-top: 2px;
+}
+/* Hacer que la tarjeta del itinerario tenga espacio suficiente */
+.bento-itinerario {
+  grid-column: span 2; /* Si usas una retícula bento, haz que ocupe dos columnas en lugar de una apretada */
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Organizar cada fila con espacio adecuado */
+.itinerario-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+}
+
+/* Forzar que el icono mantenga su tamaño sin aplastar el texto */
+.itinerario-icono {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  object-fit: contain;
+}
+
+/* Asegurar que el texto respire y no se rompa feo */
+.itinerario-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.itinerario-info h3 {
+  font-family: var(--f-serif);
+  font-size: 1.05rem;
+  margin: 0;
+  color: var(--texto);
+  font-weight: 500;
+  text-transform: none;
+}
+
+.itinerario-info .hora {
+  font-family: var(--f-sans);
+  font-size: 0.85rem;
+  color: var(--ciruela);
+  font-weight: 600;
+  margin-top: 3px;
+}
+/* ============ CÓDIGO DE VESTIMENTA ============ */
+.vestimenta__tipo {
+  font-family: var(--f-script);
+  font-size: 1.8rem;
+  color: var(--dorado-oscuro);
+  margin: 0 0 6px;
+}
+.icono-seccion {
+  width: 95px;
+  height: auto;
+} 
+/* ============ PADRINOS ============ */
+.padrinos__foto {
+  width: 70%;
+  max-width: 280px;
+  border-radius: 12px;
+  margin: 10px auto;
+  box-shadow: 0 4px 15px var(--sombra);
+}
+.padrinos__nombres {
+  font-family: var(--f-script);
+  font-size: 1.6rem;
+  color: var(--lavanda-oscuro);
+  margin: 8px 0 0;
+}
+
+
+/* ============ BOTONES ============ */
+.btn-confirmar {
+  display: inline-block;
+  background-image: linear-gradient(135deg, var(--rosa-palo), var(--lila));
+  color: #3f2d57;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  margin-top: 15px;
+  border: 1px solid var(--dorado-suave);
+  cursor: pointer;
+  font-family: var(--f-sans);
+  font-size: .95rem;
+  transition: background 0.3s ease, transform .25s ease, border-color .3s ease;
+}
+.btn-confirmar:hover { filter: brightness(.96); border-color: #fff; transform: translateY(-2px); }
+
+.btn-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-image: linear-gradient(135deg, var(--rosa-palo), var(--lila));
+  color: #3f2d57;
+  border: 1px solid rgba(255,255,255,.7);
+  padding: 12px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px var(--sombra);
+  z-index: 1000;
+  font-family: var(--f-sans);
+}
+.btn-float:hover { filter: brightness(.96); }
+
+/* ============ FORMULARIO RSVP ============ */
+.nota-confirmacion { color: var(--lavanda-oscuro); font-size: .92rem; }
+
+.form-rsvp {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+  text-align: left;
+}
+.form-rsvp__campo { display: flex; flex-direction: column; gap: 5px; }
+.form-rsvp__campo label {
+  font-size: .82rem;
+  color: var(--lavanda-oscuro);
+  font-weight: 600;
+}
+.form-rsvp__campo input,
+.form-rsvp__campo select,
+.form-rsvp__campo textarea {
+  font-family: var(--f-sans);
+  font-size: .92rem;
+  padding: 10px 12px;
+  border: 1px solid var(--lavanda-linea);
+  border-radius: 10px;
+  background: rgba(255,255,255,.75);
+  color: var(--texto);
+}
+.form-rsvp__campo input:focus,
+.form-rsvp__campo select:focus,
+.form-rsvp__campo textarea:focus {
+  outline: none;
+  border-color: var(--lavanda-principal);
+  box-shadow: 0 0 0 3px rgba(150, 123, 182, .2);
+}
+.form-rsvp__campo textarea { resize: vertical; }
+.form-rsvp__enviar { align-self: center; }
+.form-rsvp__estado {
+  text-align: center;
+  font-size: .88rem;
+  color: var(--lavanda-oscuro);
+  min-height: 1.2em;
+}
+
+/* ============ QR ============ */
+.qr-code {
+  max-width: 200px;
+  border: 2px solid var(--lavanda-principal);
+  border-radius: 10px;
+  padding: 5px;
+  margin-top: 15px;
+}
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 20px;
+  font-size: 0.9rem;
+  color: var(--ciruela);
+}
+
+/* ============ SCROLL REVEAL ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 560px) {
+  .nombres { font-size: 3.1rem; }
+  .itinerario::before { left: 24px; }
+  .itinerario__item,
+  .itinerario__item--izq,
+  .itinerario__item--der {
+    width: 100%;
+    left: 0;
+    flex-direction: row;
+    text-align: left;
+    padding-left: 48px;
+  }
+  .itinerario__item--izq::after,
+  .itinerario__item--der::after {
+    left: 13px;
+    right: auto;
+  }
+  .padres__grid { gap: 22px; }
+  .itinerario__item--izq, .itinerario__item--der { justify-content: flex-start; padding-right: 6px; }
+  .itinerario__texto { flex: 1 1 auto; }
+}
+
+/* ============ FONDO AMBIENTAL (degradados rosa–rosa palo y lila–lavanda) ============ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 38% at 10% 6%, #F8D7E5 0%, transparent 72%),
+    radial-gradient(55% 40% at 96% 26%, #C9B5E8 0%, transparent 72%),
+    radial-gradient(60% 42% at 4% 58%, #EBC1D4 0%, transparent 72%),
+    radial-gradient(60% 45% at 100% 86%, #D7C6EE 0%, transparent 72%),
+    radial-gradient(40% 30% at 30% 100%, #D8A0B5 0%, transparent 75%),
+    linear-gradient(180deg, #ffffff 0%, #E6DDF7 100%);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .card, .itinerario__texto { background: rgba(255,255,255,.88); }
+}
+
+/* ============ ESFERAS DIFUSAS Y LAVANDA DE FONDO ============ */
+.fondo-ambiental { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.esfera {
+  position: absolute;
+  width: 55vmax; height: 55vmax;
+  max-width: 520px; max-height: 520px;
+  border-radius: 50%;
+  filter: blur(55px);
+  opacity: .6;
+  animation: flota 24s ease-in-out infinite alternate;
+}
+.esfera--1 { top: -8%;  left: -18%;  background: radial-gradient(circle at 35% 35%, #F8D7E5, #EBC1D4 70%); }
+.esfera--2 { top: 20%;  right: -20%; background: radial-gradient(circle at 40% 40%, #C9B5E8, #D7C6EE 70%); animation-delay: -6s; }
+.esfera--3 { bottom: 22%; left: -22%; background: radial-gradient(circle at 40% 40%, #D8A0B5, #EBC1D4 70%); opacity: .45; animation-delay: -12s; }
+.esfera--4 { bottom: -10%; right: -14%; background: radial-gradient(circle at 40% 40%, #D7C6EE, #E6DDF7 70%); animation-delay: -18s; }
+@keyframes flota { to { transform: translate(5%, 7%) scale(1.08); } }
+
+.flor-fondo { position: absolute; width: 190px; height: 190px; opacity: .4; }
+.flor-fondo--1 { top: 5%;     left: -30px;  color: #a58bd0; transform: rotate(-25deg); }
+.flor-fondo--2 { top: 32%;    right: -40px; color: #c98aa4; transform: rotate(30deg) scaleX(-1); }
+.flor-fondo--3 { bottom: 28%; left: -45px;  color: #a58bd0; transform: rotate(15deg); }
+.flor-fondo--4 { bottom: 3%;  right: -30px; color: #c98aa4; transform: rotate(-20deg); }
+@media (max-width: 560px) { .flor-fondo { width: 130px; height: 130px; } }
+@media (prefers-reduced-motion: reduce) { .esfera { animation: none; } }
+
+
+/* ============================================================
+   BENTO GRID
+   Mosaico de bloques de vidrio con tamaños alternados.
+   Escritorio/tablet: 4 columnas · Móvil (≤560px): 2 columnas.
+   ============================================================ */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+.bento > .card {
+  margin: 0;
+  min-width: 0;
+  border-radius: 22px;
+  transition: opacity .6s ease, transform .6s ease, box-shadow .4s ease, background .4s ease;
+}
+.bento > .card.is-visible:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 38px rgba(140, 100, 170, .22), inset 0 1px 0 rgba(255,255,255,.95);
+}
+.bento .icono-seccion { display: block; margin: 0 auto 6px; }
+.bento-2 { grid-column: span 2; }
+.bento-4 { grid-column: 1 / -1; }
+
+/* Tintes dentro de la paleta (mantienen translucidez y desenfoque) */
+.bento > .tinte-rosa    { background: linear-gradient(145deg, rgba(248,215,229,.85), rgba(255,255,255,.45)); }
+.bento > .tinte-lila    { background: linear-gradient(145deg, rgba(201,181,232,.55), rgba(255,255,255,.42)); }
+.bento > .tinte-lavanda { background: linear-gradient(145deg, rgba(230,221,247,.90), rgba(255,255,255,.45)); }
+
+/* Si "Compartir fotos" se oculta (sin enlace), Vestimenta ocupa todo el ancho */
+.bento:has(#compartir-fotos[style*="display: none"]) .vestimenta { grid-column: 1 / -1; }
+
+/* Bloques de ancho completo: textos largos con ancho de lectura cómodo */
+.bento-4 > p { max-width: 640px; margin-left: auto; margin-right: auto; }
+.form-rsvp { width: 100%; max-width: 560px; margin-left: auto; margin-right: auto; }
+.aviso-ninos p { max-width: 620px; margin: 0 auto; }
+
+/* ---- Mosaico de fotos ---- */
+.mosaico {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: var(--fila, 130px);
+  gap: 12px;
+}
+.mosaico img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  object-fit: cover;          /* recorta, nunca deforma */
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.9);
+  box-shadow: 0 6px 18px rgba(140,100,170,.18);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.mosaico img:hover {
+  transform: scale(1.025);
+  box-shadow: 0 12px 26px rgba(140,100,170,.28);
+  position: relative;
+  z-index: 1;
+}
+/* Mosaico A (Nuestros Momentos): alto + grande + ancho */
+.mosaico--a { --fila: 150px; }
+.mosaico--a .m-alto   { grid-column: 1 / span 2; grid-row: 1 / span 3; object-position: center 25%; }
+.mosaico--a .m-grande { grid-column: 3 / span 2; grid-row: 1 / span 2; }
+.mosaico--a .m-ancho  { grid-column: 3 / span 2; grid-row: 3; object-position: center 30%; }
+/* Mosaico B (Más Momentos): alto + grande + alto */
+.mosaico--b { --fila: 125px; }
+.mosaico--b .m-grande            { grid-column: 2 / span 2; grid-row: 1 / span 2; }
+.mosaico--b .m-alto:first-child  { grid-column: 1;          grid-row: 1 / span 2; object-position: center 25%; }
+.mosaico--b .m-alto:last-child   { grid-column: 4;          grid-row: 1 / span 2; object-position: center 25%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bento > .card, .mosaico img { transition: none; }
+  .bento > .card.is-visible:hover, .mosaico img:hover { transform: none; }
+}
+
+/* ---- Móvil: 2 columnas máximo, 1 donde hay texto largo ---- */
+@media (max-width: 560px) {
+  .container { padding: 0 14px; }
+  .bento { gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bento > .card { padding: 24px 16px; border-radius: 20px; }
+
+  /* Bloques de media columna: Ceremonia y Recepción */
+  .bento-2 { grid-column: span 1; }
+  .bento > .card.recepcion { padding: 22px 12px; }
+  .recepcion h2 { font-size: 1.02rem; letter-spacing: .06em; }
+  .recepcion p { font-size: .88rem; margin: 4px 0; }
+  .recepcion .icono-seccion { width: 38px; height: 38px; }
+  .recepcion .btn-mapa { padding: 9px 14px; font-size: .82rem; }
+
+  /* Textos largos: ancho completo */
+  .vestimenta, .compartir { grid-column: 1 / -1; }
+
+  .mosaico { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .mosaico--a { --fila: 120px; }
+  .mosaico--a .m-alto   { grid-column: 1; grid-row: 1 / span 2; }
+  .mosaico--a .m-grande { grid-column: 2; grid-row: 1; }
+  .mosaico--a .m-ancho  { grid-column: 2; grid-row: 2; object-position: center; }
+  .mosaico--b { --fila: 125px; }
+  .mosaico--b .m-grande           { grid-column: 1 / span 2; grid-row: 1 / span 2; }
+  .mosaico--b .m-alto:first-child { grid-column: 1; grid-row: 3 / span 2; }
+  .mosaico--b .m-alto:last-child  { grid-column: 2; grid-row: 3 / span 2; }
+}
